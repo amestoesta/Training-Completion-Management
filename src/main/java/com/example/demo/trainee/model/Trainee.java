@@ -121,6 +121,14 @@ public class Trainee {
 		this.assignedTrainings = assignedTrainings;
 	}
 
+	public void setStartDate(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 
-	
+	public void setEndDate(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

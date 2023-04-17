@@ -97,5 +97,17 @@ public class Training {
 		this.traineeSet = traineeSet;
 	}
 
+
+	public void setAvailDate(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void setDueDate(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

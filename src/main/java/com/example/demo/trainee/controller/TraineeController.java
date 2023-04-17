@@ -34,7 +34,7 @@ public class TraineeController {
 	@PostMapping("/save") //save trainee
 	public ResponseEntity<Trainee> saveTrainee(@RequestBody Trainee trnObjc){
 		traineeService.saveTrainee(trnObjc);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 
@@ -44,13 +44,13 @@ public class TraineeController {
 	}
 	
 	@GetMapping("/{traineeId}")// retrieve specific trainee by ID
-	public List<Trainee> getTraineebyId(@PathVariable(required = false) Long traineeId){
-		return traineeService.getTraineeDetails(traineeId);
-	}
-	
-	@GetMapping("/find/{name}")// retrieve specific trainee by name
+		public List<Trainee> getTraineebyId(@PathVariable(required = false) Long traineeId){
+			return traineeService.getTraineeDetails(traineeId);
+		}	
+		
+		@GetMapping("/find/{name}")// retrieve specific trainee by name
 	public List<Trainee> findTraineeContainingByName(@PathVariable String name){
-		return traineeRepository.findByNameContaining(name);
+							return traineeRepository.findByNameContaining(name);
 	}	
 	
 	@GetMapping("/search/{position}") // retrieve specific trainee by position
@@ -87,7 +87,6 @@ public class TraineeController {
 			
 		}
 	}
-	
 	
 	@PatchMapping("/update/{traineeId}") // update specific field
 	public Trainee updateTraineebyFields(@PathVariable Long traineeId,@RequestBody Map<String, Object> fields) {
