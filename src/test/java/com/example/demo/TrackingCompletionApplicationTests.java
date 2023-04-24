@@ -3,18 +3,17 @@ package com.example.demo;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import com.example.demo.trainee.model.Trainee;
 import com.example.demo.trainee.repository.TraineeRepository;
@@ -39,12 +38,13 @@ class TrackingCompletionApplicationTests {
 	public void testCreateTrn () {
 		Trainee trainee = new Trainee();
 		trainee.setTraineeId(52L);
-		trainee.setName("Froilan Zaguirre");
+		trainee.setName("Froilan Jesus Zaguirre");
 		trainee.setPosition("Lead Developer");
 		trainee.setStartDate(LocalDate.now());
 		trainee.setEndDate(LocalDate.now().plusMonths(3));
 		traineeRepository.save(trainee);
 		assertNotNull(traineeRepository.findById(trainee.getTraineeId()).get());
+		
 	}
 
 	private void assertNotNull(Trainee trainee) {
@@ -81,22 +81,21 @@ class TrackingCompletionApplicationTests {
 	}
 	
 	@Test
-	public void testAssignTrainee() {
-		Trainee trainee = traineeRepository.findById(902L).get();
-		Training training = trainingRepository.findById(352L).get();
-		
-		Long traineeId = 902L;
-		Long trainingId = 352L;
-		traineeRepository.save(trainee);
-		assertTrue(traineeService.assignTrainingToTrainee(traineeId, trainingId));
+	public void testAssignTrainingToTrainee() {
+	    // get an existing trainee and training from the repository
+	    Long traineeId = 153L;
+	    Long trainingId = 52L;
+	    Trainee trainee = traineeRepository.findById(traineeId).get();
+	    Training training = trainingRepository.findById(trainingId).get();
+	    
+	    // call the method to assign the training to the trainee
+	    Trainee assignedTrainee = traineeService.assignTrainingToTrainee(traineeId, trainingId);
+	    
+	    // check if the training was added to the trainee's assigned trainings
+	    Set<Training> assignedTrainings = assignedTrainee.getAssignedTrainings();
+	    assertThat(assignedTrainings.contains(training));
 	}
 
-	private void assertTrue(Trainee assignTrainingToTrainee) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	
 	
 	
 }

@@ -15,6 +15,8 @@ import com.example.demo.training.model.Training;
 import com.example.demo.trainee.repository.TraineeRepository;
 import com.example.demo.training.repository.TrainingRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class TraineeService {
 	
@@ -45,6 +47,8 @@ public class TraineeService {
 	}
 
 	//assign trainings
+	
+	@Transactional
 	public Trainee assignTrainingToTrainee(Long traineeId, Long trainingId) {
 		Set<Training> trainingSet = null;
 		Trainee trainee = traineeRepository.findById(traineeId).get();
