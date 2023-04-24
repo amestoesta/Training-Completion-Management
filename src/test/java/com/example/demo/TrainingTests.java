@@ -4,7 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,12 +25,12 @@ public class TrainingTests {
 	@Test
 	public void testCreateTraining () {
 		Training training = new Training();
-		training.setTrainingId(252L);
-		training.setActName("Onboarding 3");
-		training.setAvailDate("2023-04-25");
-		training.setDueDate("2023-07-21");
+		training.setTrainingId(1L);
+		training.setActName("Research 9");
+		training.setAvailDate(LocalDate.now());
+		training.setDueDate(LocalDate.now().plusDays(2));
 		trainingRepository.save(training);
-		assertNotNull(trainingRepository.findById(252L).get());
+		assertNotNull(trainingRepository.findById(training.getTrainingId()).get());
 		
 	}
 

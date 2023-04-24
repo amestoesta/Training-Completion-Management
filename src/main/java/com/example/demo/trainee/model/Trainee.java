@@ -1,6 +1,6 @@
 package com.example.demo.trainee.model;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,8 +24,8 @@ public class Trainee {
 	private Long traineeId;
 	private String name;
 	private String position;
-	private Date startDate;
-	private Date endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	
 	@ManyToMany
 	@JoinTable(name = "trainee_activity",
@@ -38,7 +38,7 @@ public class Trainee {
 		
 	}
 
-	public Trainee(Long traineeId, String name, String position, Date startDate, Date endDate,
+	public Trainee(Long traineeId, String name, String position, LocalDate startDate, LocalDate endDate,
 			Set<Training> assignedTrainings) {
 		super();
 		this.traineeId = traineeId;
@@ -87,26 +87,26 @@ public class Trainee {
 
 
 
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
 
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setStartDate(LocalDate localDate) {
+		this.startDate = localDate;
 	}
 
 
 
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
 
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setEndDate(LocalDate localDate) {
+		this.endDate = localDate;
 	}
 
 
@@ -119,16 +119,6 @@ public class Trainee {
 
 	public void setAssignedTrainings(Set<Training> assignedTrainings) {
 		this.assignedTrainings = assignedTrainings;
-	}
-
-	public void setStartDate(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setEndDate(String string) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

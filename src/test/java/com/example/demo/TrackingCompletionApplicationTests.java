@@ -4,16 +4,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.example.demo.trainee.model.Trainee;
 import com.example.demo.trainee.repository.TraineeRepository;
+import com.example.demo.trainee.service.TraineeService;
+import com.example.demo.training.model.Training;
+import com.example.demo.training.repository.TrainingRepository;
 
 
 @SpringBootTest
@@ -22,17 +29,22 @@ class TrackingCompletionApplicationTests {
 	@Autowired
 	private TraineeRepository traineeRepository;
 	
+	@Autowired
+	private TrainingRepository trainingRepository;
+	
+	@Autowired
+	private TraineeService traineeService;
+	
 	@Test
 	public void testCreateTrn () {
 		Trainee trainee = new Trainee();
-		trainee.setTraineeId(1L);
-		trainee.setName("Kean");
+		trainee.setTraineeId(52L);
+		trainee.setName("Froilan Zaguirre");
 		trainee.setPosition("Lead Developer");
-		trainee.setStartDate("2023-04-25");
-		trainee.setEndDate("2023-07-21");
+		trainee.setStartDate(LocalDate.now());
+		trainee.setEndDate(LocalDate.now().plusMonths(3));
 		traineeRepository.save(trainee);
-		assertNotNull(traineeRepository.findById(1L).get());
-		
+		assertNotNull(traineeRepository.findById(trainee.getTraineeId()).get());
 	}
 
 	private void assertNotNull(Trainee trainee) {
@@ -55,10 +67,11 @@ class TrackingCompletionApplicationTests {
 	
 	@Test
 	public void testInfoUpdate() {
-		Trainee trainee = traineeRepository.findById(502L).get();
+		Trainee trainee = traineeRepository.findById(852L).get();
 		trainee.setPosition("Full Stack Developer");
+		trainee.setEndDate(LocalDate.now().plusMonths(6)); 
 		traineeRepository.save(trainee);
-		assertNotEquals("Lead Developer", traineeRepository.findById(502L).get().getPosition());
+		assertNotEquals("Lead Developer", traineeRepository.findById(852L).get().getPosition());
 	}
 	
 	@Test
@@ -66,4 +79,24 @@ class TrackingCompletionApplicationTests {
 		traineeRepository.deleteById(552L);
 		assertThat(traineeRepository.existsById(552L)).isFalse();
 	}
+	
+	@Test
+	public void testAssignTrainee() {
+		Trainee trainee = traineeRepository.findById(902L).get();
+		Training training = trainingRepository.findById(352L).get();
+		
+		Long traineeId = 902L;
+		Long trainingId = 352L;
+		traineeRepository.save(trainee);
+		assertTrue(traineeService.assignTrainingToTrainee(traineeId, trainingId));
+	}
+
+	private void assertTrue(Trainee assignTrainingToTrainee) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
+	
 }

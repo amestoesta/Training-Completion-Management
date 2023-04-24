@@ -93,4 +93,4 @@ public class TraineeController {
 		return traineeService.updateTraineeFields(traineeId,fields);
 	}
 	
-}
+} 	

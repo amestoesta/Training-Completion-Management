@@ -1,6 +1,7 @@
 package com.example.demo.training.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,8 +24,8 @@ public class Training {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long trainingId;
 	private String actName;
-	private Date availDate;
-	private Date dueDate;
+	private LocalDate availDate;
+	private LocalDate dueDate;
 	
 	
 	@JsonIgnore
@@ -38,7 +39,7 @@ public class Training {
 	}
 
 
-	public Training(Long trainingId, String actName, Date availDate, Date dueDate, Set<Trainee> traineeSet) {
+	public Training(Long trainingId, String actName, LocalDate availDate, LocalDate dueDate, Set<Trainee> traineeSet) {
 		super();
 		this.trainingId = trainingId;
 		this.actName = actName;
@@ -68,23 +69,23 @@ public class Training {
 	}
 
 
-	public Date getAvailDate() {
+	public LocalDate getAvailDate() {
 		return availDate;
 	}
 
 
-	public void setAvailDate(Date availDate) {
-		this.availDate = availDate;
+	public void setAvailDate(LocalDate localDate) {
+		this.availDate = localDate;
 	}
 
 
-	public Date getDueDate() {
+	public LocalDate getDueDate() {
 		return dueDate;
 	}
 
 
-	public void setDueDate(Date dueDate) {
-		this.dueDate = dueDate;
+	public void setDueDate(LocalDate localDate) {
+		this.dueDate = localDate;
 	}
 
 
@@ -97,17 +98,6 @@ public class Training {
 		this.traineeSet = traineeSet;
 	}
 
-
-	public void setAvailDate(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void setDueDate(String string) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	
 }
